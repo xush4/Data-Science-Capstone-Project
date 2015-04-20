@@ -8,9 +8,15 @@ Quiz 1
 
 Question 2
 ------------
-blogs <- readLines("data/en_US/en_US.blogs.txt")
-news <- readLines("data/en_US/en_US.news.txt")
-twitter <- readLines("data/en_US/en_US.twitter.txt")
+  # import the blogs and twitter datasets in text mode
+  blogs <- readLines("final/en_US/en_US.blogs.txt", encoding="UTF-8")
+twitter <- readLines("final/en_US/en_US.twitter.txt", encoding="UTF-8")
+
+# import the news dataset in binary mode
+con <- file("final/en_US/en_US.news.txt", open="rb")
+news <- readLines(con, encoding="UTF-8")
+close(con)
+rm(con)
 length(twitter)
 # find the Length of data
 
