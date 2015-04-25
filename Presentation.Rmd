@@ -1,0 +1,41 @@
+---
+title: "Data Science Capstone"
+author: "Marco Xu"
+date: "Saturday, April 25, 2015"
+output: slidy_presentation
+---
+
+## Introduction
+
+A predictive model which returns the most likely word to follow the current word. The vision is to put this into a text app such as SwiftKey, who not incidentally sponsored this capstone session. Thanks SwiftKey!
+
+## Slide with R Code and Output
+For example, if you input "I" as the first word
+```{r}
+library(shiny)
+library(wordcloud)
+setwd("H:\\open course\\introduction to Rprogramming Hopkins\\Data-Science-Capstone-Project\\shinny")
+source("Predict.R")
+predictedWords <-predictThis("I")
+summary(predictedWords)
+```
+
+## Try to see What are the words predicted.
+
+```{r}
+predictedWords <-predictThis("I")
+wordcloud(predictedWords[1:20], 
+          c(20,15,12,10,8,6,4,3,3,3,3,3,3,3,3,3,3,3,3,3) ,
+          random.order=F, max.words=200, colors=brewer.pal(8, "Dark2"))
+```
+
+## Let's make another pridiction with sevearal words.
+
+```{r}
+predictedWords <-predictThis("The guy in front of me just bought a pound of bacon, a bouquet, and a case of")
+wordcloud(predictedWords[1:20], 
+          c(20,15,12,10,8,6,4,3,3,3,3,3,3,3,3,3,3,3,3,3) ,
+          random.order=F, max.words=200, colors=brewer.pal(8, "Dark2"))
+```
+
+Though beer is not the first-rank prediction, it appears to be the third choice.
