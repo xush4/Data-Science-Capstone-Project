@@ -1,15 +1,11 @@
 library(shiny)
-source("KoziolPredict.R")
+library(wordcloud)
+source("Predict.R")
 
 shinyServer(
   function(input,output){
-    #     userText <- reactive({input$userText})
-    #     writtenText <- as.character(substitute(userText))
-    #    output$topSelection <- userText
-    #     if(substr(userText,length(userText)-1, length(userText)) == " "){
-    #     
-    predictedWords <- reactive({predictThis(input$userText)})
     
+    predictedWords <- reactive({predictThis(input$userText)})
     output$firstWord <- renderText({
       predictedWords()[1]
     })
@@ -21,7 +17,9 @@ shinyServer(
     })
     output$otherWords <- renderText({
       predictedWords()[4:10]
+    })    
+    output$picture<-renderPlot({
+      wordcloud(predictedWords()[1:20], c(20,15,12,10,8,6,4,3,3,3,3,3,3,3,3,3,3,3,3,3) ,random.order=T, max.words=200, colors=brewer.pal(8, "Dark2"))
     })
-    #     }
-  }
+    }
 )
